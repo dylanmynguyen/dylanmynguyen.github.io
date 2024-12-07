@@ -150,7 +150,9 @@
     text-align: center;
   }
 
-
+  .answers button:hover {
+    background-color: #3b8a3e;
+  }
 
   .question {
     margin-bottom: 30px;
