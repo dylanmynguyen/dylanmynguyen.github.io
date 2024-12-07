@@ -50,6 +50,10 @@
     text-align: center;
   }
 
+  .answers button:hover {
+    background-color: #3b8a3e;
+  }
+
 
 
   .question {

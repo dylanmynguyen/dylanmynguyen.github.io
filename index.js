@@ -37,13 +37,13 @@ function start (e) {
     document.getElementById("yes").removeAttribute("hidden")
     document.getElementById("no").removeAttribute("hidden")
     document.body.style.backgroundSize = "cover"
-    interval = setInterval(music, 30000)
+    // interval = setInterval(music, 30000)
 
 
 }
 
 function music () {
-    audio3.play();   
+    // audio3.play();   
 }
 
 
