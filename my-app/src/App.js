@@ -31,6 +31,18 @@ export default function BlindBoxSimulator() {
     prizes: [
       { image: '/z/bw.png', weight: 1}, { image: '/z/cjh.png', weight: 1 }, { image: '/z/cnw.png', weight: 1}, { image: '/z/fjh.png', weight: 1}, { image: '/z/nw.png', weight: 1}, { image: '/z/pbw.png', weight: 1},
     ]
+    },
+    {
+    box: '/boxes/tss.jpg',
+    prizes: [
+      { image: '/tss/tsseq.png', weight: 1}, { image: '/tss/tssta.png', weight: 12}, 
+      { image: '/tss/tsstad.png', weight: 12}, { image: '/tss/tsstaw.png', weight: 12},
+      { image: '/tss/tsstd.png', weight: 12}, { image: '/tss/tsste.png', weight: 12},
+      { image: '/tss/tsstg.png', weight: 12}, { image: '/tss/tsstj.png', weight: 12},
+      { image: '/tss/tsstp.png', weight: 12}, { image: '/tss/tssts.png', weight: 12},
+      { image: '/tss/tsstt.png', weight: 12}, { image: '/tss/tsstte.png', weight: 12},
+      { image: '/tss/tsstv.png', weight: 12},
+    ]
     }
   ]
 
