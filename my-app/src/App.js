@@ -14,6 +14,13 @@ export default function BlindBoxSimulator() {
   }
 }
 
+const specialAudio = React.useRef(null);
+
+React.useEffect(() => {
+  specialAudio.current = new Audio('/rizz.mp3');
+}, []);
+
+
   const boxes = [
     {
     box: '/boxes/mlp.webp', 
@@ -66,16 +73,25 @@ export default function BlindBoxSimulator() {
   const BOX_HEIGHT = 400;
   const LID_HEIGHT = 100; // Height of the lid (top part that opens)
 
-  let itemImage = '/mlp/mlprarity.webp'
-
   const handleOpenBox = () => {
-    setIsOpen(true);
+    setIsOpen(true)
+    
+  if (images.prize === '/me.png' && specialAudio.current) {
+    specialAudio.current.currentTime = 0;
+    specialAudio.current.play().catch(() => {
+    });
+  }
+
     setTimeout(() => {
       setShowItem(true);
     }, 300);
   };
 
   const handleReset = () => {
+      if (specialAudio.current) {
+    specialAudio.current.pause();
+    specialAudio.current.currentTime = 0;
+  }
     setIsOpen(false);
     setShowItem(false);
     setImages(chooseBoxAndPrize());
