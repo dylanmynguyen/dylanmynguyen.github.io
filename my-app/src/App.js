@@ -100,7 +100,7 @@ backgroundRepeat: 'no-repeat',
       fontFamily: 'Arial, sans-serif',
       overflow: 'hidden'
     }}>
-      <h1 style={{ color: 'white', marginBottom: '40px', fontSize: '48px' }}>
+      <h1 style={{ color: 'black', marginBottom: '40px', fontSize: '48px' }}>
         Blind Box Simulator
       </h1>
 
@@ -273,7 +273,7 @@ backgroundRepeat: 'no-repeat',
             style={{
               padding: '15px 40px',
               fontSize: '24px',
-              background: '#ffd43b',
+              background: '#fa8993',
               border: 'none',
               borderRadius: '10px',
               cursor: 'pointer',
@@ -295,7 +295,7 @@ backgroundRepeat: 'no-repeat',
             style={{
               padding: '15px 40px',
               fontSize: '24px',
-              background: '#51cf66',
+              background: '#991722',
               border: 'none',
               borderRadius: '10px',
               cursor: 'pointer',
