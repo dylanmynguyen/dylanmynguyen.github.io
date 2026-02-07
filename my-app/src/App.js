@@ -14,12 +14,6 @@ export default function BlindBoxSimulator() {
   }
 }
 
-
-  const boxImageArr = [
-    '/boxes/mlp.webp',
-    '/boxes/zootopia.jpg',
-  ]
-
   const boxes = [
     {
     box: '/boxes/mlp.webp', 
@@ -36,32 +30,35 @@ export default function BlindBoxSimulator() {
     box: '/boxes/tss.jpg',
     prizes: [
       { image: '/tss/tsseq.png', weight: 1}, { image: '/tss/tssta.png', weight: 12}, 
-      { image: '/tss/tsstad.png', weight: 12}, { image: '/tss/tsstaw.png', weight: 12},
+      { image: '/tss/tssad.png', weight: 12}, { image: '/tss/tsstaw.png', weight: 12},
       { image: '/tss/tsstd.png', weight: 12}, { image: '/tss/tsste.png', weight: 12},
       { image: '/tss/tsstg.png', weight: 12}, { image: '/tss/tsstj.png', weight: 12},
       { image: '/tss/tsstp.png', weight: 12}, { image: '/tss/tssts.png', weight: 12},
       { image: '/tss/tsstt.png', weight: 12}, { image: '/tss/tsstte.png', weight: 12},
       { image: '/tss/tsstv.png', weight: 12},
     ]
-    }
+    },
   ]
 
-  const [images] = useState(() => {
-  const box = boxes[Math.floor(Math.random() * boxes.length)];
-  const prize = weightedRandom(box.prizes);
-
-  return {
-    box: box.box,
-    prize: prize.image,
+  const chooseBoxAndPrize = () => {
+    const num = Math.random();
+    if (num < 0.1) {
+      return {
+      box: '/boxes/val2.webp',
+      prize: '/me.png',
+      }
+    }
+    const box = boxes[Math.floor(Math.random() * boxes.length)];
+    const prize = weightedRandom(box.prizes);
+    
+    return {
+      box: box.box,
+      prize: prize.image,
+    };
   };
-});
 
-
-  // Choose box once on page load
-  // const [boxImage] = useState(() => {
-  //   const randomIndex = Math.floor(Math.random() * boxImageArr.length);
-  //   return boxImageArr[randomIndex];
-  // });
+  const [images, setImages] = useState(() => chooseBoxAndPrize());
+  const [resetKey, setResetKey] = useState(0);
 
   
   // BOX DIMENSIONS - adjust these to match your image size
@@ -81,13 +78,21 @@ export default function BlindBoxSimulator() {
   const handleReset = () => {
     setIsOpen(false);
     setShowItem(false);
+    setImages(chooseBoxAndPrize());
+    setResetKey(prev => prev + 1);
   };
+
+  // Check if the current prize is me.png
+  const isSpecialPrize = images.prize === '/me.png';
 
   return (
     <div style={{
       width: '100vw',
       height: '100vh',
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      background: 'url(/bgwp.webp)',
+backgroundSize: 'cover',
+backgroundPosition: 'center',
+backgroundRepeat: 'no-repeat',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -99,7 +104,7 @@ export default function BlindBoxSimulator() {
         Blind Box Simulator
       </h1>
 
-      <div style={{ position: 'relative', width: `${BOX_WIDTH}px`, height: `${BOX_HEIGHT}px` }}>
+      <div key={resetKey} style={{ position: 'relative', width: `${BOX_WIDTH}px`, height: `${BOX_HEIGHT}px` }}>
         {/* Item popping out */}
         {showItem && (
           <div style={{
@@ -108,20 +113,41 @@ export default function BlindBoxSimulator() {
             left: '50%',
             transform: 'translateX(-50%)',
             animation: 'popOut 0.5s ease-out',
-            zIndex: 10
+            zIndex: 10,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '20px'
           }}>
             {images.prize ? (
-              // Custom image
-              <img 
-                src={images.prize} 
-                alt="Prize" 
-                style={{
-                  width: '300px',
-                  height: '300px',
-                  objectFit: 'contain',
-                  filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))'
-                }}
-              />
+              <>
+                {/* Custom image */}
+                <img 
+                  src={images.prize} 
+                  alt="Prize" 
+                  style={{
+                    width: isSpecialPrize ? '500px' : '300px',
+                    height: isSpecialPrize ? '500px' : '300px',
+                    objectFit: 'contain',
+                    filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))'
+                  }}
+                />
+                {/* Valentine text for special prize */}
+                {isSpecialPrize && (
+                  <div style={{
+                    fontSize: '36px',
+                    marginTop: '-120px',
+                    fontWeight: 'bold',
+                    textAlign: 'center',
+                    color: '#ff69b4',
+                    background: '#000000',
+                    textShadow: '2px 2px 4px rgba(0,0,0,0.5), 0 0 20px rgba(255,105,180,0.8)',
+                    animation: 'pulse 1.5s ease-in-out infinite'
+                  }}>
+                    Will you be my Valentine? ❤️
+                  </div>
+                )}
+              </>
             ) : (
               // Default Stickman
               <svg width="100" height="150" viewBox="0 0 100 150">
@@ -155,9 +181,9 @@ export default function BlindBoxSimulator() {
           backgroundSize: `${BOX_WIDTH}px ${BOX_HEIGHT}px`,
           backgroundPosition: '0 0',
           backgroundRepeat: 'no-repeat',
-          borderTop: '4px solid #c92a2a',
-          borderLeft: '4px solid #c92a2a',
-          borderRight: '4px solid #c92a2a',
+          borderTop: '4px solid #000000',
+          borderLeft: '4px solid #000000',
+          borderRight: '4px solid #000000',
           borderRadius: '10px 10px 0 0',
           transition: 'top 0.5s ease-out',
           zIndex: 5,
@@ -188,9 +214,9 @@ export default function BlindBoxSimulator() {
           backgroundSize: `${BOX_WIDTH}px ${BOX_HEIGHT}px`,
           backgroundPosition: `0 -${LID_HEIGHT}px`,
           backgroundRepeat: 'no-repeat',
-          borderBottom: '4px solid #c92a2a',
-          borderLeft: '4px solid #c92a2a',
-          borderRight: '4px solid #c92a2a',
+          borderBottom: '4px solid #000000',
+          borderLeft: '4px solid #000000',
+          borderRight: '4px solid #000000',
           borderRadius: '0 0 10px 10px',
           boxShadow: '0 8px 30px rgba(0,0,0,0.3)',
           display: 'flex',
@@ -309,6 +335,15 @@ export default function BlindBoxSimulator() {
           100% {
             transform: translateY(-100px) rotate(360deg);
             opacity: 0;
+          }
+        }
+
+        @keyframes pulse {
+          0%, 100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.05);
           }
         }
       `}</style>
