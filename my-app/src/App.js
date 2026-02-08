@@ -45,6 +45,15 @@ React.useEffect(() => {
       { image: '/tss/tsstv.png', weight: 12},
     ]
     },
+    {
+      box: '/boxes/valbox.webp',
+      prizes: [
+        { image: '/san/cm.png', weight: 1}, { image: '/san/hk.png', weight: 1},
+        { image: '/san/kur.png', weight: 1}, { image: '/san/mm.png', weight: 1},
+        { image: '/san/poc.png', weight: 1}, { image: '/san/pom.png', weight: 1},
+        { image: '/san/ts.png', weight: 1},
+      ]
+    }
   ]
 
   const chooseBoxAndPrize = () => {
