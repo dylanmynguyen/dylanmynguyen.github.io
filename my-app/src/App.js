@@ -58,7 +58,7 @@ React.useEffect(() => {
 
   const chooseBoxAndPrize = () => {
     const num = Math.random();
-    if (num < 0.1) {
+    if (num < 0.05) {
       return {
       box: '/boxes/val2.webp',
       prize: '/me.png',
